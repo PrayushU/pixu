@@ -1,5 +1,10 @@
 /* kernel.h - Master include for Xinu types and constants */
 
+#ifndef _KERNEL _
+#define _KERNEL_
+
+
+#define SYSERR (-1)
 
 /* Basic integer types with explicit sizes */
 
@@ -18,3 +23,5 @@ typedef int32 sid32;
 typedef int16 qid16;
 typedef int32 did32;
 typedef uint32 intmask;
+
+#endif
