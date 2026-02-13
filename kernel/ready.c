@@ -4,7 +4,6 @@
 #include "xinu.h"
 
 
-qid16 readylist; /* Index of ready list*/
 
 
 /*-------------------------------------------------------------
@@ -14,10 +13,10 @@ qid16 readylist; /* Index of ready list*/
 
 
 status ready(
-    pid32 pid;
+    pid32 pid
 )
 {
-    register strcut procent *prptr;
+    register struct procent *prptr;
 
     if(isbadpid(pid)){
         return SYSERR;
@@ -25,7 +24,7 @@ status ready(
 
     /* Set process state to indicate ready and add to ready list*/
 
-    prptr = &proctabp[pid];
+    prptr = &proctab[pid];
     prptr->prstate = PR_READY;
     insert(pid, readylist, prptr->prprio);
     resched();

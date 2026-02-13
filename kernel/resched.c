@@ -2,7 +2,6 @@
 
 #include "xinu.h"
 
-struct defer Defer;
 
 /*--------------------------------------------------------------------
  * resched - Reschedule processor to highest priority eligible process
@@ -26,7 +25,7 @@ struct defer Defer;
     ptold = &proctab[currpid];
 
     if(ptold->prstate == PR_CURR){ /* Process remains eligible */
-        if(ptold->prprio > firstkey(readylist)){
+        if(ptold->prprio >= firstkey(readylist)){
             return;
         }
 
@@ -40,7 +39,7 @@ struct defer Defer;
     currpid = dequeue(readylist);
     ptnew = &proctab[currpid];
     ptnew->prstate = PR_CURR;
-    preempt = QUANTUM; /* Reset time slice for process*/
+    //preempt = QUANTUM; /* Reset time slice for process*/
     ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
     /* Old process return here when resumed */
@@ -58,11 +57,11 @@ status resched_cntl(
 {
     switch(defer){
         case DEFER_START: /* Handler a deferral request */
-            if(Defer.ndefers++ = 0){
+            if(Defer.ndefers++ == 0){
                 Defer.attempt = FALSE;
             }
             return OK;
-        case DEFER_STOP; /* Hander end of deferral */
+        case DEFER_STOP: /* Hander end of deferral */
             if(Defer.ndefers <= 0){
                 return SYSERR;
             }

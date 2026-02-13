@@ -1,0 +1,4 @@
+.git/
+obj/
+bin/
+compile_flags.txt

@@ -1,7 +1,6 @@
 /* queue.c - enqueue, dequeue*/
 #include "xinu.h"
 
-struct qentry queuetab[NQENT];
 
 pid32 enqueue(
     pid32 pid, /*ID of process to insert*/

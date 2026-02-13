@@ -3,27 +3,6 @@
 #include "xinu.h"
 
 /*---------------------------------------------------------
- *  getfirst - Remove a process from the front of queue
- *---------------------------------------------------------
- */
-
-pid32 getfirst(qid16 q)
-{
-    pid32 head;
-
-    if (isempty(q))
-    {
-        return EMPTY;
-    }
-
-    head = queuehead(q);
-    return getitem(queuetab[head].qnext);
-}
-
-
-
-
-/*---------------------------------------------------------
  *  getlast - Remove a process from the end of queue
  *---------------------------------------------------------
  */
