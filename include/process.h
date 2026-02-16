@@ -71,5 +71,10 @@ extern struct defer Defer;
 status ready(pid32 pid);
 void resched(void);
 void ctxsw(void *old_sp, void *new_sp); /* Defined in ctxsw.S */
+syscall kill(pid32 pid);
+void xdone(void); /* For when process has reached the last process */
+void halt(void);  /* Halts process in infinite while loop */
+
+pid32 getpid();
 
 #endif

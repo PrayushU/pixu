@@ -13,6 +13,8 @@
 
 #define NULLPROC 0
 
+#define NULLCH '\0'
+
 /* Basic integer types with explicit sizes */
 
 typedef int int32;
