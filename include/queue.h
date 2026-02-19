@@ -18,15 +18,15 @@
 #define MAXKEY 0x7FFFFFFF
 #define MINKEY 0x80000000
 
-struct qentry
-{              /* One per process plus two per list  */
-  int32 qkey;  /* Key to which the queue is ordered  */
-  qid16 qnext; /* Index of next process or tail      */
-  qid16 qprev; /* Index of previous process or head  */
+struct qentry { /* One per process plus two per list  */
+  int32 qkey;   /* Key to which the queue is ordered  */
+  qid16 qnext;  /* Index of next process or tail      */
+  qid16 qprev;  /* Index of previous process or head  */
 };
 
 extern struct qentry queuetab[];
 extern qid16 readylist;
+extern qid16 waitlist;
 
 /* Inline queue manipulation functions  */
 
@@ -44,12 +44,12 @@ extern qid16 readylist;
 #define isbadqid(x) (((int32)(x) < 0) || (int32)(x) >= NQENT - 1)
 
 /* Function Prototypes for Queue Manipulation */
-pid32   getfirst(qid16 q);
-pid32   getlast(qid16 q);
-pid32   getitem(pid32 pid);
-pid32   enqueue(pid32 pid, qid16 q);
-pid32   dequeue(qid16 q);
-status  insert(pid32 pid, qid16 q, int32 key);
-qid16   newqueue(void);
+pid32 getfirst(qid16 q);
+pid32 getlast(qid16 q);
+pid32 getitem(pid32 pid);
+pid32 enqueue(pid32 pid, qid16 q);
+pid32 dequeue(qid16 q);
+status insert(pid32 pid, qid16 q, int32 key);
+qid16 newqueue(void);
 
 #endif

@@ -34,7 +34,10 @@ typedef uint32 status;
 typedef uint16 pri16;
 typedef uint32 syscall;
 
+void kputc(char c);
 void kprintf(char *fmt);
 void kputn(uint32 val);
+
+#define roundmb(x) (char *)((7 + (uint32)(x)) & (~7))
 
 #endif

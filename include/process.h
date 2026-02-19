@@ -67,14 +67,27 @@ struct defer {
 
 extern struct defer Defer;
 
+pid32 getpid();
+syscall getprio(pid32 pid);
+
 /* Function Prototypes for Process Management */
-status ready(pid32 pid);
-void resched(void);
+status
+ready(pid32 pid); /* Change process state to PR_READY and puts in ready queue */
+void resched(void); /*  Runs highest prioirty process from ready list */
 void ctxsw(void *old_sp, void *new_sp); /* Defined in ctxsw.S */
+pri16 resume(pid32 pid);                /* Resumes process  */
+
 syscall kill(pid32 pid);
 void xdone(void); /* For when process has reached the last process */
 void halt(void);  /* Halts process in infinite while loop */
 
-pid32 getpid();
+void userret(void);
+
+pid32 newpid();
+
+pid32 create(void *funcaddr, uint32 ssize, pri16 priority, char *name,
+             uint32 nargs, ...);
+
+pri16 chprio(pid32 pid, pri16 newprio);
 
 #endif

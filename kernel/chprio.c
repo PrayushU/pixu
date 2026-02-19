@@ -6,6 +6,7 @@
 
 /*-----------------------------------------------------
  *  chprio  -   Change process priority
+ *  @return - returns old process priority
  *-----------------------------------------------------
  */
 

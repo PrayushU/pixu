@@ -24,7 +24,7 @@ ASFLAGS = $(CPU) $(ARCH)
 
 # --- Source Discovery ---
 # This finds all .c and .S files in your src subdirectories
-SRCS_C  = $(shell find kernel lib arch -name '*.c')
+SRCS_C  = $(shell find kernel lib arch test -name '*.c')
 SRCS_S  = $(shell find arch -name '*.[sS]')
 
 # Transform src/xxx.c into obj/xxx.o

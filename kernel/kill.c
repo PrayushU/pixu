@@ -22,21 +22,32 @@ syscall kill(pid32 pid) {
     return SYSERR;
   }
 
-  if (--prcount <= 1) {
-    xdone();
-  }
+  prcount--; /*The prcistence*/
 
+  /* the following is not correct as we like 'Presistence' state of OS in for
+   * bare-metal OS. It stays running and would wait for new command or for
+   * network packet to arrive. */
+  // if (prcount <= 1) {
+  //   xdone();
+  // }
   freestk(prptr->prstkbase, prptr->prstklen);
 
   switch (prptr->prstate) {
   case PR_CURR:
     prptr->prstate = PR_FREE;
     resched();
-  case PR_SLEEP:
-  case PR_RECTIM:
-  case PR_WAIT:
+    break;
+
   case PR_READY:
     getitem(pid);
+    prptr->prstate = PR_FREE;
+    break;
+  case PR_SLEEP:
+  case PR_WAIT:
+    getitem(pid);
+    prptr->prstate = PR_FREE;
+    break;
+
   default:
     prptr->prstate = PR_FREE;
   }
